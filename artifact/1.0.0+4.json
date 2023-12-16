@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0+4",
+  "release_time": "2023-12-17 04:04:09",
+  "apk": {
+    "name": "",
+    "url": {
+      "official": "",
+      "mirror": "https://mirror.ghproxy.com/"
+    }
+  },
+  "ipa": {
+    "name": "",
+    "url": {
+      "official": "",
+      "mirror": "https://mirror.ghproxy.com/"
+    }
+  }
+}
