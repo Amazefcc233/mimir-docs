@@ -113,6 +113,7 @@
         })
             .then(response => response.json())
             .then(versionInfo => {
+                version = versionInfo.version;
                 document.getElementById("versionInfoFileName").textContent = versionInfo.apk.name;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;

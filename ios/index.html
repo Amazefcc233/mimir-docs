@@ -118,6 +118,7 @@
         })
             .then(response => response.json())
             .then(versionInfo => {
+                version = versionInfo.version;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
                 if (versionInfo.ipa.name) {
