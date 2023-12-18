@@ -34,7 +34,7 @@
             height: 60px;
         }
     </style>
-
+    <script src="/static/marked-11.1.0.min.js"></script>
 </head>
 
 <body>
@@ -83,6 +83,10 @@
                             <th scope="row">发布时间</th>
                             <td id="versionInfoReleaseTime">$releaseTime</td>
                         </tr>
+                        <tr>
+                            <th scope="row">更新说明</th>
+                            <td id="versionInfoReleaseNote">$releaseNote</td>
+                        </tr>
                     </tbody>
                 </table>
                 <a id="versionInfoDownloadBtn1" href="$downloadUrl1" class="btn btn-outline-primary">官方源下载（可能被墙）</a>
@@ -91,7 +95,10 @@
                 <a id="versionInfoTestFlight" href="https://testflight.apple.com/join/ecafeulK" class="btn btn-outline-success">从TestFlight下载</a>
             </div>
         </div>
-        <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
+        <p>
+            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small><br>
+            <small>**App Store及TestFlight中的应用可能需要经过Apple审核，此过程可能需要几小时（最长应在24小时内完成）。若当前尚未看到最新版本，请耐心等待审核完成。</small>
+        </p>
 
     </main>
 
@@ -131,7 +138,23 @@
                 console.error("Failed to fetch version info: " + error);
                 document.getElementById("loadingErrorAlert").classList.remove("d-none");
             })
-            .then(() => document.getElementById("loadingPlaceholder").classList.add("d-none"));
+            .then(() => {
+                document.getElementById("loadingPlaceholder").classList.add("d-none")
+                fetch("https://api.github.com/repos/liplum-dev/mimir/releases/tags/v"+version, {
+                    cache: "no-cache",
+                    mode: "cors"
+                })
+                    .then(response => response.json())
+                    .then(versionInfo => {
+                        var releaseNote = versionInfo.body;
+                        releaseNote = releaseNote.substring(releaseNote.indexOf("## Changes") + 10, releaseNote.indexOf("## How to download"));
+                        document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(releaseNote);
+                    })
+                    .catch(error => {
+                        console.error("Failed to fetch release: " + error);
+                        document.getElementById("versionInfoReleaseNote").textContent = '加载信息时出错';
+                    })
+            });
     </script>
 
 </body>

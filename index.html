@@ -34,6 +34,7 @@
             height: 60px;
         }
     </style>
+    <script src="/static/marked-11.1.0.min.js"></script>
 </head>
 
 <body>
@@ -74,9 +75,13 @@
                             <th scope="row">版本号</th>
                             <td id="versionInfoVersion">$version</td>
                         </tr>
-						<tr>
+                        <tr>
                             <th scope="row">发布时间</th>
                             <td id="versionInfoReleaseTime">$releaseTime</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">更新说明</th>
+                            <td id="versionInfoReleaseNote">$releaseNote</td>
                         </tr>
                     </tbody>
                 </table>
@@ -97,21 +102,39 @@
     </footer>
 
     <script>
+        var version = undefined;
         fetch("/artifact/latest.json", {
             cache: "no-cache",
             mode: "cors"
         })
             .then(response => response.json())
             .then(versionInfo => {
+                version = versionInfo.version;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
-				document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
+                document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
                 document.getElementById("versionInfo").classList.remove("d-none");
             })
             .catch(error => {
                 console.error("Failed to fetch version info: " + error);
                 document.getElementById("loadingErrorAlert").classList.remove("d-none");
             })
-            .then(() => document.getElementById("loadingPlaceholder").classList.add("d-none"));
+            .then(() => {
+                document.getElementById("loadingPlaceholder").classList.add("d-none")
+                fetch("https://api.github.com/repos/liplum-dev/mimir/releases/tags/v"+version, {
+                    cache: "no-cache",
+                    mode: "cors"
+                })
+                    .then(response => response.json())
+                    .then(versionInfo => {
+                        var releaseNote = versionInfo.body;
+                        releaseNote = releaseNote.substring(releaseNote.indexOf("## Changes") + 10, releaseNote.indexOf("## How to download"));
+                        document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(releaseNote);
+                    })
+                    .catch(error => {
+                        console.error("Failed to fetch release: " + error);
+                        document.getElementById("versionInfoReleaseNote").textContent = '加载信息时出错';
+                    })
+            });
     </script>
 
 </body>
