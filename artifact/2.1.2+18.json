@@ -1,0 +1,18 @@
+{
+  "version": "2.1.2+18",
+  "release_time": "2023-12-19 09:03:08",
+  "apk": {
+    "name": "SITLife-v2.1.2+18.apk",
+    "url": {
+      "official": "https://github.com/liplum-dev/mimir/releases/download/v2.1.2%2B18/SITLife-v2.1.2%2B18.apk",
+      "mirror": "https://mirror.ghproxy.com/https://github.com/liplum-dev/mimir/releases/download/v2.1.2%2B18/SITLife-v2.1.2%2B18.apk"
+    }
+  },
+  "ipa": {
+    "name": "",
+    "url": {
+      "official": "",
+      "mirror": "https://mirror.ghproxy.com/"
+    }
+  }
+}
