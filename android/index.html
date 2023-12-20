@@ -114,11 +114,19 @@
             .then(response => response.json())
             .then(versionInfo => {
                 version = versionInfo.version;
-                document.getElementById("versionInfoFileName").textContent = versionInfo.apk.name;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.apk.url.official);
-                document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.apk.url.mirror);
+                if (versionInfo.apk.name) {
+                    document.getElementById("versionInfoFileName").textContent = versionInfo.apk.name;
+                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.apk.url.official);
+                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.apk.url.mirror);
+                } else {
+                    document.getElementById("versionInfoFileName").textContent = "此版本未发布android安装包";
+                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", "#");
+                    document.getElementById("versionInfoDownloadBtn1").setAttribute("class", "btn btn-outline-primary disabled");
+                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", "#");
+                    document.getElementById("versionInfoDownloadBtn2").setAttribute("class", "btn btn-outline-success disabled");
+                }
                 document.getElementById("versionInfo").classList.remove("d-none");
             })
             .catch(error => {
