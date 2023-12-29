@@ -119,11 +119,11 @@
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
                 document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
                 if (versionInfo.apk.name) {
-                    document.getElementById("versionInfoFileName").textContent = versionInfo.apk.name;
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.apk.url.official);
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.apk.url.mirror);
+                    document.getElementById("versionInfoFileName").textContent = versionInfo.Android.name;
+                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.Android.url.official);
+                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.Android.url.mirror);
                 } else {
-                    document.getElementById("versionInfoFileName").textContent = "此版本未发布android安装包";
+                    document.getElementById("versionInfoFileName").textContent = "此版本未发布Android安装包";
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", "#");
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("class", "btn btn-outline-primary disabled");
                     document.getElementById("versionInfoDownloadBtn2").setAttribute("href", "#");
