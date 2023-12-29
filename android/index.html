@@ -117,7 +117,7 @@
                 version = versionInfo.version;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoReleaseNote").innerHTML = marked(versionInfo.release_note);
+                document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
                 if (versionInfo.apk.name) {
                     document.getElementById("versionInfoFileName").textContent = versionInfo.apk.name;
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.apk.url.official);

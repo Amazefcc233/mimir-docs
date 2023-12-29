@@ -113,7 +113,7 @@
                 version = versionInfo.version;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoReleaseNote").innerHTML = marked(versionInfo.release_note);
+                document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
                 document.getElementById("versionInfo").classList.remove("d-none");
             })
             .catch(error => {
