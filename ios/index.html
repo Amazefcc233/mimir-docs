@@ -123,10 +123,10 @@
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
                 document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
-                if (versionInfo.iOS.name) {
-                    document.getElementById("versionInfoFileName").textContent = versionInfo.iOS.name;
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.iOS.url.official);
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.iOS.url.mirror);
+                if (versionInfo.downloads.iOS.name) {
+                    document.getElementById("versionInfoFileName").textContent = versionInfo.downloads.iOS.name;
+                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.downloads.iOS.url.official);
+                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.downloads.iOS.url.mirror);
                 } else {
                     document.getElementById("versionInfoFileName").textContent = "此版本未发布安装包，请从App Store或TestFlight下载或更新。";
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", "#");
