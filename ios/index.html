@@ -122,6 +122,7 @@
                 version = versionInfo.version;
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
+                document.getElementById("versionInfoReleaseNote").innerHTML = marked(versionInfo.release_note);
                 if (versionInfo.ipa.name) {
                     document.getElementById("versionInfoFileName").textContent = versionInfo.ipa.name;
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.ipa.url.official);
@@ -142,21 +143,7 @@
                 document.getElementById("loadingErrorAlert").classList.remove("d-none");
             })
             .then(() => {
-                document.getElementById("loadingPlaceholder").classList.add("d-none")
-                fetch("https://api.github.com/repos/liplum-dev/mimir/releases/tags/v"+version, {
-                    cache: "no-cache",
-                    mode: "cors"
-                })
-                    .then(response => response.json())
-                    .then(versionInfo => {
-                        var releaseNote = versionInfo.body;
-                        releaseNote = releaseNote.substring(releaseNote.indexOf("## Changes") + 10, releaseNote.indexOf("## How to download"));
-                        document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(releaseNote);
-                    })
-                    .catch(error => {
-                        console.error("Failed to fetch release: " + error);
-                        document.getElementById("versionInfoReleaseNote").textContent = '加载信息时出错';
-                    })
+                document.getElementById("loadingPlaceholder").classList.add("d-none");
             });
     </script>
 
