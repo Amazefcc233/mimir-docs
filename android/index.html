@@ -118,7 +118,7 @@
                 document.getElementById("versionInfoVersion").textContent = versionInfo.version;
                 document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
                 document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
-                if (versionInfo.apk.name) {
+                if (versionInfo.Android.name) {
                     document.getElementById("versionInfoFileName").textContent = versionInfo.Android.name;
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.Android.url.official);
                     document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.Android.url.mirror);
