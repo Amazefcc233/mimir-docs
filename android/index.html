@@ -85,6 +85,10 @@
                             <td id="versionInfoReleaseTime">$releaseTime</td>
                         </tr>
                         <tr>
+                            <th scope="row">SHA256</th>
+                            <td id="versionInfoSHA256">$sha256</td>
+                        </tr>
+                        <tr>
                             <th scope="row">更新说明</th>
                             <td id="versionInfoReleaseNote">$releaseNote</td>
                         </tr>
@@ -120,10 +124,12 @@
                 document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
                 if (versionInfo.downloads.Android.name) {
                     document.getElementById("versionInfoFileName").textContent = versionInfo.downloads.Android.name;
+                    document.getElementById("versionInfoSHA256").textContent = versionInfo.downloads.Android.sha256;
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.downloads.Android.url.official);
                     document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.downloads.Android.url.mirror);
                 } else {
                     document.getElementById("versionInfoFileName").textContent = "此版本未发布Android安装包";
+                    document.getElementById("versionInfoSHA256").textContent = "(无)";
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", "#");
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("class", "btn btn-outline-primary disabled");
                     document.getElementById("versionInfoDownloadBtn2").setAttribute("href", "#");
