@@ -1,0 +1,27 @@
+{
+  "version": "2.4.1+44",
+  "release_time": "2024-05-06 15:31:48",
+  "release_note": "- [新增] 课表内支持更改校区\r\n- [新增] 当超出当前课表学期范围的调课时将作出提醒\r\n- [新增] 课表预览界面现可显示周标题和跳转按钮\r\n- [新增] 扫雷添加更多难度\r\n- [优化] 更新了二维码格式，使其有更强的兼容能力\r\n- [修正] 修复二维码可能无法扫描的问题\r\n\r",
+  "downloads": {
+    "Android": {
+      "name": "SITLife-v2.4.1+44.apk",
+      "default": "official",
+      "sha256": "f712673c9201691fc0005f722cf6b1c4911bf0330cc11c842315081772b321b7",
+      "url": {
+        "official": "https://temp.sitmc.club/prepare-download/v2.4.1+44/SITLife-v2.4.1+44.apk",
+        "github": "https://github.com/liplum-dev/mimir/releases/download/v2.4.1%2B44/SITLife-v2.4.1%2B44.apk",
+        "mirror": "https://mirror.ghproxy.com/https://github.com/liplum-dev/mimir/releases/download/v2.4.1%2B44/SITLife-v2.4.1%2B44.apk"
+      }
+    },
+    "iOS": {
+      "name": "",
+      "default": "official",
+      "sha256": "",
+      "url": {
+        "official": "https://temp.sitmc.club/prepare-download/v2.4.1+44/",
+        "github": "",
+        "mirror": "https://mirror.ghproxy.com/"
+      }
+    }
+  }
+}
