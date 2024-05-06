@@ -94,8 +94,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <a id="versionInfoDownloadBtn1" href="$downloadUrl1" class="btn btn-outline-primary">官方源下载（可能无法下载）</a>
-                <a id="versionInfoDownloadBtn2" href="$downloadUrl2" class="btn btn-outline-success">备用下载链接</a>
+                <a id="versionInfoDownloadBtn1" href="$downloadUrl1" class="btn btn-outline-primary">官方源下载</a>
+                <a id="versionInfoDownloadBtn2" href="$downloadUrl2" class="btn btn-outline-success">GitHub下载</a>
+                <a id="versionInfoDownloadBtn3" href="$downloadUrl3" class="btn btn-outline-info">GitHub镜像下载</a>
             </div>
         </div>
         <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
@@ -126,7 +127,8 @@
                     document.getElementById("versionInfoFileName").textContent = versionInfo.downloads.Android.name;
                     document.getElementById("versionInfoSHA256").textContent = versionInfo.downloads.Android.sha256;
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.downloads.Android.url.official);
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.downloads.Android.url.mirror);
+                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.downloads.Android.url.github);
+                    document.getElementById("versionInfoDownloadBtn3").setAttribute("href", versionInfo.downloads.Android.url.mirror);
                 } else {
                     document.getElementById("versionInfoFileName").textContent = "此版本未发布Android安装包";
                     document.getElementById("versionInfoSHA256").textContent = "(无)";
@@ -134,6 +136,8 @@
                     document.getElementById("versionInfoDownloadBtn1").setAttribute("class", "btn btn-outline-primary disabled");
                     document.getElementById("versionInfoDownloadBtn2").setAttribute("href", "#");
                     document.getElementById("versionInfoDownloadBtn2").setAttribute("class", "btn btn-outline-success disabled");
+                    document.getElementById("versionInfoDownloadBtn3").setAttribute("href", "#");
+                    document.getElementById("versionInfoDownloadBtn3").setAttribute("class", "btn btn-outline-info disabled");
                 }
                 document.getElementById("versionInfo").classList.remove("d-none");
             })
