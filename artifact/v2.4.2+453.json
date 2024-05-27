@@ -1,0 +1,17 @@
+{
+  "version": "2.4.2+453",
+  "release_time": "2024-05-27T15:21:27.000Z",
+  "release_note": "- 新增 | 新增数独游戏\r\n- 新增 | 新增游戏记录，支持重玩同一局游戏或通过二维码分享该局游戏\r\n- 新增 | 支持保存并分享生成的二维码\r\n- 优化 | 应用进入后台后将暂停游戏计时\r\n- 修正 | 修复了本科生教务系统无法工作的问题",
+  "downloads": {
+    "Android": {
+      "name": "SITLife-v2.4.2+453.apk",
+      "default": "official",
+      "sha256": "91f069af4bce5240cef49a745c2e72d08722b889b85430c3b4418f0a731a5510",
+      "url": {
+        "official": "https://temp.sitmc.club/prepare-download/v2.4.2-453/SITLife-v2.4.2-453.apk",
+        "github": "https://github.com/liplum-dev/mimir/releases/download/v2.4.2%2B453/SITLife-v2.4.2%2B453.apk",
+        "mirror": "https://mirror.ghproxy.com/https://github.com/liplum-dev/mimir/releases/download/v2.4.2%2B453/SITLife-v2.4.2%2B453.apk"
+      }
+    }
+  }
+}
