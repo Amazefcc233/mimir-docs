@@ -111,11 +111,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <a id="versionInfoDownloadBtn1" href="$downloadUrl1"
+                <a id="link-download-official" href="$downloadUrl1"
                     class="if-download-available btn btn-outline-primary mg-t-5">官方源下载</a>
-                <a id="versionInfoDownloadBtn2" href="$downloadUrl2"
+                <a id="link-download-github" href="$downloadUrl2"
                     class="if-download-available btn btn-outline-success mg-t-5">GitHub下载</a>
-                <a id="versionInfoDownloadBtn3" href="$downloadUrl3"
+                <a id="link-download-mirror" href="$downloadUrl3"
                     class="if-download-available btn btn-outline-info mg-t-5">GitHub镜像下载</a>
                 <a id="versionInfoAppStore" href="https://apps.apple.com/cn/app/id6468989112"
                     class="btn btn-outline-primary mg-t-5">从App Store下载</a>
@@ -159,9 +159,9 @@
                 if (download?.name) {
                     $("#versionInfoFileName").text(download.name)
                     $("#versionInfoSHA256").text(download.sha256)
-                    $("#versionInfoDownloadBtn1").attr("href", download.url.official)
-                    $("#versionInfoDownloadBtn2").attr("href", download.url.github)
-                    $("#versionInfoDownloadBtn3").attr("href", download.url.mirror)
+                    for (const [channel, url] of Object.entries(download.url)) {
+                        $(`#link-download-${channel}`).attr("href", url)
+                    }
                 } else {
                     $(".if-download-available").hide()
                     $(".if-not-download-available").show()
