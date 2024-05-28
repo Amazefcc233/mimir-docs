@@ -24,9 +24,11 @@
             position: relative;
             min-height: 100%;
         }
+
         body {
             margin-bottom: 60px;
         }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -49,7 +51,8 @@
     </style>
     <script src="/static/jquery.min.js"></script>
     <script src="/static/marked-11.1.0.min.js"></script>
-    <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
+    <script async src="https://u.amazefcc233.com/script.js"
+        data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
 
 <body>
@@ -111,15 +114,18 @@
                 <a id="versionInfoDownloadBtn1" href="$downloadUrl1" class="btn btn-outline-primary mg-t-5">官方源下载</a>
                 <a id="versionInfoDownloadBtn2" href="$downloadUrl2" class="btn btn-outline-success mg-t-5">GitHub下载</a>
                 <a id="versionInfoDownloadBtn3" href="$downloadUrl3" class="btn btn-outline-info mg-t-5">GitHub镜像下载</a>
-                <a id="versionInfoAppStore" href="https://apps.apple.com/cn/app/id6468989112" class="btn btn-outline-primary mg-t-5">从App Store下载（正式版）</a>
-                <a id="versionInfoTestFlight" href="https://testflight.apple.com/join/fjsqOyNs" class="btn btn-outline-success mg-t-5">从TestFlight下载（测试版）</a>
+                <a id="versionInfoAppStore" href="https://apps.apple.com/cn/app/id6468989112"
+                    class="btn btn-outline-primary mg-t-5">从App Store下载</a>
+                <a id="versionInfoTestFlight" href="https://testflight.apple.com/join/fjsqOyNs"
+                    class="btn btn-outline-success mg-t-5">加入TestFlight测试</a>
                 <div id="adAlert" class="alert alert-success mg-t-10" role="alert">
                     官方源下载由 <a href="https://www.sitmc.club/">上海应用技术大学Minecraft六角恐龙社群</a> 提供赞助
                 </div>
             </div>
         </div>
         <p>
-            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small><br>
+            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a
+                    href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small><br>
             <small>**App Store及TestFlight中的应用可能需要经过Apple审核，此过程可能需要几小时（最长应在24小时内完成）。若当前尚未看到最新版本，请耐心等待审核完成。</small>
         </p>
 
@@ -128,50 +134,51 @@
     <footer class="footer mt-auto py-3 mg-b-5">
         <div class="container">
             <span class="text-muted">
-                <a href="https://beian.miit.gov.cn/">沪ICP备18042337号-4</a> | Powered by <a href="https://github.com/Amazefcc233/mimir-docs">GitHub Pages</a>.
+                <a href="https://beian.miit.gov.cn/">沪ICP备18042337号-4</a> | Powered by <a
+                    href="https://github.com/Amazefcc233/mimir-docs">GitHub Pages</a>.
             </span>
         </div>
     </footer>
 
     <script>
-        var version = undefined;
+        var version = undefined
         fetch("/artifact/latest.json", {
             cache: "no-cache",
             mode: "cors"
         })
             .then(response => response.json())
             .then(versionInfo => {
-                version = versionInfo.version;
-                $("#versionInfoVersion").text(versionInfo.version);
-                $("#versionInfoReleaseTime").text(versionInfo.release_time);
-                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note));
-                if (versionInfo.downloads.iOS.name) {
-                    $("#versionInfoFileName").text(versionInfo.downloads.iOS.name);
-                    $("#versionInfoSHA256").text(versionInfo.downloads.iOS.sha256);
-                    $("#versionInfoDownloadBtn1").attr("href", versionInfo.downloads.iOS.url.official);
-                    $("#versionInfoDownloadBtn2").attr("href", versionInfo.downloads.iOS.url.github);
-                    $("#versionInfoDownloadBtn3").attr("href", versionInfo.downloads.iOS.url.mirror);
+                version = versionInfo.version
+                $("#versionInfoVersion").text(versionInfo.version)
+                $("#versionInfoReleaseTime").text(versionInfo.release_time)
+                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note))
+                if (versionInfo.downloads.iOS?.name) {
+                    $("#versionInfoFileName").text(versionInfo.downloads.iOS.name)
+                    $("#versionInfoSHA256").text(versionInfo.downloads.iOS.sha256)
+                    $("#versionInfoDownloadBtn1").attr("href", versionInfo.downloads.iOS.url.official)
+                    $("#versionInfoDownloadBtn2").attr("href", versionInfo.downloads.iOS.url.github)
+                    $("#versionInfoDownloadBtn3").attr("href", versionInfo.downloads.iOS.url.mirror)
                 } else {
-                    $("#versionInfoFileName").text("此版本未发布安装包，请从App Store或TestFlight下载或更新。");
-                    $("#versionInfoSHA256").text("(无)");
+                    $("#versionInfoFileName").text("此版本未发布安装包，请从App Store或TestFlight下载或更新。")
+                    $("#versionInfoSHA256").text("(无)")
                     $("#versionInfoDownloadBtn1").attr("href", "#")
-                    $("#versionInfoDownloadBtn1").attr("href", "#");
-                    $("#versionInfoDownloadBtn1").attr("style", "display: none");
-                    $("#versionInfoDownloadBtn2").attr("href", "#");
-                    $("#versionInfoDownloadBtn2").attr("class", "disabled");
-                    $("#versionInfoDownloadBtn2").attr("style", "display: none");
-                    $("#versionInfoDownloadBtn3").attr("href", "#");
-                    $("#versionInfoDownloadBtn3").attr("class", "disabled");
-                    $("#versionInfoDownloadBtn3").attr("style", "display: none");
+                    $("#versionInfoDownloadBtn1").attr("href", "#")
+                    $("#versionInfoDownloadBtn1").attr("style", "display: none")
+                    $("#versionInfoDownloadBtn2").attr("href", "#")
+                    $("#versionInfoDownloadBtn2").attr("class", "disabled")
+                    $("#versionInfoDownloadBtn2").attr("style", "display: none")
+                    $("#versionInfoDownloadBtn3").attr("href", "#")
+                    $("#versionInfoDownloadBtn3").attr("class", "disabled")
+                    $("#versionInfoDownloadBtn3").attr("style", "display: none")
                 }
-                $("#versionInfo").removeClass("d-none");
+                $("#versionInfo").removeClass("d-none")
             })
             .catch(error => {
-                console.error("Failed to fetch version info: " + error);
-                $("#loadingErrorAlert").removeClass("d-none");
+                console.error("Failed to fetch version info: " + error)
+                $("#loadingErrorAlert").removeClass("d-none")
             })
             .then(() => {
-                $("#loadingPlaceholder").addClass("d-none");
+                $("#loadingPlaceholder").addClass("d-none")
             });
     </script>
 

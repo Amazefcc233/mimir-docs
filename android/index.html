@@ -140,7 +140,7 @@
                 $("#versionInfoVersion").text(versionInfo.version);
                 $("#versionInfoReleaseTime").text(versionInfo.release_time);
                 $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note));
-                if (versionInfo.downloads.Android.name) {
+                if (versionInfo.downloads.Android?.name) {
                     $("#versionInfoFileName").text(versionInfo.downloads.Android.name);
                     $("#versionInfoSHA256").text(versionInfo.downloads.Android.sha256);
                     $("#versionInfoDownloadBtn1").attr("href", versionInfo.downloads.Android.url.official);
