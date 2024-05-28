@@ -12,6 +12,16 @@
         "github": "https://github.com/liplum-dev/mimir/releases/download/v2.4.2%2B453/SITLife-v2.4.2%2B453.apk",
         "mirror": "https://mirror.ghproxy.com/https://github.com/liplum-dev/mimir/releases/download/v2.4.2%2B453/SITLife-v2.4.2%2B453.apk"
       }
+    },
+    "iOS": {
+      "name": "",
+      "default": "official",
+      "sha256": "",
+      "url": {
+        "official": "https://temp.sitmc.club/prepare-download/v2.4.1+44/",
+        "github": "",
+        "mirror": "https://mirror.ghproxy.com/"
+      }
     }
   }
 }
