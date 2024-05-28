@@ -24,9 +24,11 @@
             position: relative;
             min-height: 100%;
         }
+
         body {
             margin-bottom: 60px;
         }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -49,13 +51,16 @@
     </style>
     <script src="/static/jquery.min.js"></script>
     <script src="/static/marked.min.js"></script>
-    <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
+    <script async src="https://u.amazefcc233.com/script.js"
+        data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">小应生活</a>
+        <div>
+            <a class="navbar-brand h1" style="padding-left: 16px;" href="/"> 小应生活 </a>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -107,38 +112,40 @@
                 </div>
             </div>
         </div>
-        <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
+        <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a
+                    href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
 
     </main>
 
     <footer class="footer mt-auto py-3 mg-b-5">
         <div class="container">
             <span class="text-muted">
-                <a href="https://beian.miit.gov.cn/">沪ICP备18042337号-4</a> | Powered by <a href="https://github.com/Amazefcc233/mimir-docs">GitHub Pages</a>.
+                <a href="https://beian.miit.gov.cn/">沪ICP备18042337号-4</a> | Powered by <a
+                    href="https://github.com/Amazefcc233/mimir-docs">GitHub Pages</a>.
             </span>
         </div>
     </footer>
 
     <script>
-        var version = undefined;
+        var version = undefined
         fetch("/artifact/latest.json", {
             cache: "no-cache",
             mode: "cors"
         })
             .then(response => response.json())
             .then(versionInfo => {
-                version = versionInfo.version; 
-                $("#versionInfoVersion").text(versionInfo.version);
-                $("#versionInfoReleaseTime").text(versionInfo.release_time);
-                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note));
-                $("#versionInfo").removeClass("d-none");
+                version = versionInfo.version
+                $("#versionInfoVersion").text(versionInfo.version)
+                $("#versionInfoReleaseTime").text(versionInfo.release_time)
+                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note))
+                $("#versionInfo").removeClass("d-none")
             })
             .catch(error => {
-                console.error("Failed to fetch version info: " + error);
-                $("#loadingErrorAlert").removeClass("d-none");
+                console.error("Failed to fetch version info: " + error)
+                $("#loadingErrorAlert").removeClass("d-none")
             })
             .then(() => {
-                $("#loadingPlaceholder").addClass("d-none");
+                $("#loadingPlaceholder").addClass("d-none")
             });
     </script>
 
