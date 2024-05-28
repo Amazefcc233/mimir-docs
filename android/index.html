@@ -47,6 +47,7 @@
             margin-bottom: 5px;
         }
     </style>
+    <script src="/static/jquery.min.js"></script>
     <script src="/static/marked-11.1.0.min.js"></script>
     <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
@@ -136,33 +137,33 @@
             .then(response => response.json())
             .then(versionInfo => {
                 version = versionInfo.version;
-                document.getElementById("versionInfoVersion").textContent = versionInfo.version;
-                document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
+                $("#versionInfoVersion").text(versionInfo.version);
+                $("#versionInfoReleaseTime").text(versionInfo.release_time);
+                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note));
                 if (versionInfo.downloads.Android.name) {
-                    document.getElementById("versionInfoFileName").textContent = versionInfo.downloads.Android.name;
-                    document.getElementById("versionInfoSHA256").textContent = versionInfo.downloads.Android.sha256;
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.downloads.Android.url.official);
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.downloads.Android.url.github);
-                    document.getElementById("versionInfoDownloadBtn3").setAttribute("href", versionInfo.downloads.Android.url.mirror);
+                    $("#versionInfoFileName").text(versionInfo.downloads.Android.name);
+                    $("#versionInfoSHA256").text(versionInfo.downloads.Android.sha256);
+                    $("#versionInfoDownloadBtn1").attr("href", versionInfo.downloads.Android.url.official);
+                    $("#versionInfoDownloadBtn2").attr("href", versionInfo.downloads.Android.url.github);
+                    $("#versionInfoDownloadBtn3").attr("href", versionInfo.downloads.Android.url.mirror);
                 } else {
-                    document.getElementById("versionInfoFileName").textContent = "此版本未发布Android安装包";
-                    document.getElementById("versionInfoSHA256").textContent = "(无)";
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", "#");
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("class", "btn btn-outline-primary disabled");
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", "#");
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("class", "btn btn-outline-success disabled");
-                    document.getElementById("versionInfoDownloadBtn3").setAttribute("href", "#");
-                    document.getElementById("versionInfoDownloadBtn3").setAttribute("class", "btn btn-outline-info disabled");
+                    $("#versionInfoFileName").text("此版本未发布Android安装包");
+                    $("#versionInfoSHA256").text("(无)");
+                    $("#versionInfoDownloadBtn1").attr("href", "#");
+                    $("#versionInfoDownloadBtn1").attr("class", "btn btn-outline-primary disabled");
+                    $("#versionInfoDownloadBtn2").attr("href", "#");
+                    $("#versionInfoDownloadBtn2").attr("class", "btn btn-outline-success disabled");
+                    $("#versionInfoDownloadBtn3").attr("href", "#");
+                    $("#versionInfoDownloadBtn3").attr("class", "btn btn-outline-info disabled");
                 }
-                document.getElementById("versionInfo").classList.remove("d-none");
+                $("#versionInfo").removeClass("d-none");
             })
             .catch(error => {
                 console.error("Failed to fetch version info: " + error);
-                document.getElementById("loadingErrorAlert").classList.remove("d-none");
+                $("#loadingErrorAlert").removeClass("d-none");
             })
             .then(() => {
-                document.getElementById("loadingPlaceholder").classList.add("d-none");
+                $("#loadingPlaceholder").addClass("d-none");
             });
     </script>
 
