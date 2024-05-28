@@ -101,7 +101,7 @@
                             <th scope="row">发布时间</th>
                             <td id="versionInfoReleaseTime">$releaseTime</td>
                         </tr>
-                        <tr>
+                        <tr id="versionInfoSHA256Row">
                             <th scope="row">SHA256</th>
                             <td id="versionInfoSHA256">$sha256</td>
                         </tr>
@@ -147,20 +147,20 @@
             mode: "cors"
         })
             .then(response => response.json())
-            .then(versionInfo => {
-                version = versionInfo.version
-                $("#versionInfoVersion").text(versionInfo.version)
-                $("#versionInfoReleaseTime").text(versionInfo.release_time)
-                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note))
-                if (versionInfo.downloads.iOS?.name) {
-                    $("#versionInfoFileName").text(versionInfo.downloads.iOS.name)
-                    $("#versionInfoSHA256").text(versionInfo.downloads.iOS.sha256)
-                    $("#versionInfoDownloadBtn1").attr("href", versionInfo.downloads.iOS.url.official)
-                    $("#versionInfoDownloadBtn2").attr("href", versionInfo.downloads.iOS.url.github)
-                    $("#versionInfoDownloadBtn3").attr("href", versionInfo.downloads.iOS.url.mirror)
+            .then(info => {
+                version = info.version
+                $("#versionInfoVersion").text(info.version)
+                $("#versionInfoReleaseTime").text(new Date(info.release_time).toLocaleString())
+                $("#versionInfoReleaseNote").html(marked.parse(info.release_note))
+                if (info.downloads.iOS?.name) {
+                    $("#versionInfoFileName").text(info.downloads.iOS.name)
+                    $("#versionInfoSHA256").text(info.downloads.iOS.sha256)
+                    $("#versionInfoDownloadBtn1").attr("href", info.downloads.iOS.url.official)
+                    $("#versionInfoDownloadBtn2").attr("href", info.downloads.iOS.url.github)
+                    $("#versionInfoDownloadBtn3").attr("href", info.downloads.iOS.url.mirror)
                 } else {
                     $("#versionInfoFileName").text("此版本未发布安装包，请从App Store或TestFlight下载或更新。")
-                    $("#versionInfoSHA256").text("(无)")
+                    $("#versionInfoSHA256Row").hide()
                     $("#versionInfoDownloadBtn1").attr("href", "#")
                     $("#versionInfoDownloadBtn1").attr("href", "#")
                     $("#versionInfoDownloadBtn1").attr("style", "display: none")
@@ -174,7 +174,7 @@
                 $("#versionInfo").removeClass("d-none")
             })
             .catch(error => {
-                console.error("Failed to fetch version info: " + error)
+                console.error("Failed to fetch version info.", error)
                 $("#loadingErrorAlert").removeClass("d-none")
             })
             .then(() => {
