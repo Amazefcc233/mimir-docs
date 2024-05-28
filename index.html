@@ -47,6 +47,7 @@
             margin-bottom: 5px;
         }
     </style>
+    <script src="/static/jquery.min.js"></script>
     <script src="/static/marked-11.1.0.min.js"></script>
     <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
@@ -126,18 +127,18 @@
         })
             .then(response => response.json())
             .then(versionInfo => {
-                version = versionInfo.version;
-                document.getElementById("versionInfoVersion").textContent = versionInfo.version;
-                document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
-                document.getElementById("versionInfo").classList.remove("d-none");
+                version = versionInfo.version; 
+                $("#versionInfoVersion").text(versionInfo.version);
+                $("#versionInfoReleaseTime").text(versionInfo.release_time);
+                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note));
+                $("#versionInfo").removeClass("d-none");
             })
             .catch(error => {
                 console.error("Failed to fetch version info: " + error);
-                document.getElementById("loadingErrorAlert").classList.remove("d-none");
+                $("#loadingErrorAlert").removeClass("d-none");
             })
             .then(() => {
-                document.getElementById("loadingPlaceholder").classList.add("d-none");
+                $("#loadingPlaceholder").addClass("d-none");
             });
     </script>
 
