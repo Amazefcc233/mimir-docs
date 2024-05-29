@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>获取 小应生活</title>
     <link rel="icon" href="/static/img/favicon.png">
-    <link rel="stylesheet" href="/static/bootstrap-4.4.1.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/bootstrap.min.css" crossorigin="anonymous">
     <style>
         .navbar {
             margin-bottom: 30px;
@@ -24,9 +24,11 @@
             position: relative;
             min-height: 100%;
         }
+
         body {
             margin-bottom: 60px;
         }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -47,7 +49,8 @@
             margin-bottom: 5px;
         }
     </style>
-    <script src="/static/marked-11.1.0.min.js"></script>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/marked.min.js"></script>
     <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
 
@@ -106,7 +109,9 @@
                 </div>
             </div>
         </div>
-        <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
+        <p>
+            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small>
+        </p>
 
     </main>
 
@@ -125,19 +130,19 @@
             mode: "cors"
         })
             .then(response => response.json())
-            .then(versionInfo => {
-                version = versionInfo.version;
-                document.getElementById("versionInfoVersion").textContent = versionInfo.version;
-                document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
-                document.getElementById("versionInfo").classList.remove("d-none");
+            .then(info => {
+                version = info.version;
+                $("#versionInfoVersion").text(info.version);
+                $("#versionInfoReleaseTime").text(new Date(info.release_time).toLocaleString());
+                $("#versionInfoReleaseNote").html(marked.parse(info.release_note));
+                $("#versionInfo").removeClass("d-none");
             })
             .catch(error => {
                 console.error("Failed to fetch version info: " + error);
-                document.getElementById("loadingErrorAlert").classList.remove("d-none");
+                $("#loadingErrorAlert").removeClass("d-none");
             })
             .then(() => {
-                document.getElementById("loadingPlaceholder").classList.add("d-none");
+                $("#loadingPlaceholder").addClass("d-none");
             });
     </script>
 

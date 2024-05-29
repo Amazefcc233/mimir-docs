@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>获取 小应生活</title>
     <link rel="icon" href="/static/img/favicon.png">
-    <link rel="stylesheet" href="/static/bootstrap-4.4.1.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/bootstrap.min.css" crossorigin="anonymous">
     <style>
         .navbar {
             margin-bottom: 30px;
@@ -24,9 +24,11 @@
             position: relative;
             min-height: 100%;
         }
+
         body {
             margin-bottom: 60px;
         }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -47,7 +49,8 @@
             margin-bottom: 5px;
         }
     </style>
-    <script src="/static/marked-11.1.0.min.js"></script>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/marked.min.js"></script>
     <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
 
@@ -85,7 +88,7 @@
             <div class="card-body">
                 <table class="table table-sm table-hover table-borderless">
                     <tbody>
-                        <tr>
+                        <tr class="if-download-available">
                             <th scope="row">文件名</th>
                             <td id="versionInfoFileName">$fileName</td>
                         </tr>
@@ -97,7 +100,7 @@
                             <th scope="row">发布时间</th>
                             <td id="versionInfoReleaseTime">$releaseTime</td>
                         </tr>
-                        <tr>
+                        <tr class="if-download-available">
                             <th scope="row">SHA256</th>
                             <td id="versionInfoSHA256">$sha256</td>
                         </tr>
@@ -107,15 +110,22 @@
                         </tr>
                     </tbody>
                 </table>
-                <a id="versionInfoDownloadBtn1" href="$downloadUrl1" class="btn btn-outline-primary mg-t-5">官方源下载</a>
-                <a id="versionInfoDownloadBtn2" href="$downloadUrl2" class="btn btn-outline-success mg-t-5">GitHub下载</a>
-                <a id="versionInfoDownloadBtn3" href="$downloadUrl3" class="btn btn-outline-info mg-t-5">GitHub镜像下载</a>
+                <a id="link-download-official" href="$downloadUrl1"
+                    class="if-download-available btn btn-outline-primary mg-t-5">官方源下载</a>
+                <a id="link-download-github" href="$downloadUrl2"
+                    class="if-download-available btn btn-outline-success mg-t-5">GitHub下载</a>
+                <a id="link-download-mirror" href="$downloadUrl3"
+                    class="if-download-available btn btn-outline-info mg-t-5">GitHub镜像下载</a>
+                <a style="display: none;"
+                    class="if-not-download-available btn btn-outline-primary disabled mg-t-5">暂无下载</a>
                 <div id="adAlert" class="alert alert-success mg-t-10" role="alert">
                     官方源下载由 <a href="https://www.sitmc.club/">上海应用技术大学Minecraft六角恐龙社群</a> 提供赞助
                 </div>
             </div>
         </div>
-        <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
+        <p>
+            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small>
+        </p>
 
     </main>
 
@@ -134,35 +144,30 @@
             mode: "cors"
         })
             .then(response => response.json())
-            .then(versionInfo => {
-                version = versionInfo.version;
-                document.getElementById("versionInfoVersion").textContent = versionInfo.version;
-                document.getElementById("versionInfoReleaseTime").textContent = versionInfo.release_time;
-                document.getElementById("versionInfoReleaseNote").innerHTML = marked.parse(versionInfo.release_note);
-                if (versionInfo.downloads.Android.name) {
-                    document.getElementById("versionInfoFileName").textContent = versionInfo.downloads.Android.name;
-                    document.getElementById("versionInfoSHA256").textContent = versionInfo.downloads.Android.sha256;
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.downloads.Android.url.official);
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.downloads.Android.url.github);
-                    document.getElementById("versionInfoDownloadBtn3").setAttribute("href", versionInfo.downloads.Android.url.mirror);
+            .then(info => {
+                version = info.version;
+                $("#versionInfoVersion").text(info.version);
+                $("#versionInfoReleaseTime").text(new Date(info.release_time).toLocaleString());
+                $("#versionInfoReleaseNote").html(marked.parse(info.release_note));
+                const download = info.downloads.Android;
+                if (download?.name) {
+                    $("#versionInfoFileName").text(download.name);
+                    $("#versionInfoSHA256").text(download.sha256);
+                    for (const [channel, url] of Object.entries(download.url)) {
+                        $(`#link-download-${channel}`).attr("href", url);
+                    }
                 } else {
-                    document.getElementById("versionInfoFileName").textContent = "此版本未发布Android安装包";
-                    document.getElementById("versionInfoSHA256").textContent = "(无)";
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("href", "#");
-                    document.getElementById("versionInfoDownloadBtn1").setAttribute("class", "btn btn-outline-primary disabled");
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("href", "#");
-                    document.getElementById("versionInfoDownloadBtn2").setAttribute("class", "btn btn-outline-success disabled");
-                    document.getElementById("versionInfoDownloadBtn3").setAttribute("href", "#");
-                    document.getElementById("versionInfoDownloadBtn3").setAttribute("class", "btn btn-outline-info disabled");
+                    $(".if-download-available").hide();
+                    $(".if-not-download-available").show();
                 }
-                document.getElementById("versionInfo").classList.remove("d-none");
+                $("#versionInfo").removeClass("d-none");
             })
             .catch(error => {
-                console.error("Failed to fetch version info: " + error);
-                document.getElementById("loadingErrorAlert").classList.remove("d-none");
+                console.error("Failed to fetch version info.", error);
+                $("#loadingErrorAlert").removeClass("d-none");
             })
             .then(() => {
-                document.getElementById("loadingPlaceholder").classList.add("d-none");
+                $("#loadingPlaceholder").addClass("d-none");
             });
     </script>
 
