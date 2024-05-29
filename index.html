@@ -24,9 +24,11 @@
             position: relative;
             min-height: 100%;
         }
+
         body {
             margin-bottom: 60px;
         }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -107,7 +109,9 @@
                 </div>
             </div>
         </div>
-        <p><small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small></p>
+        <p>
+            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small>
+        </p>
 
     </main>
 
@@ -126,11 +130,11 @@
             mode: "cors"
         })
             .then(response => response.json())
-            .then(versionInfo => {
-                version = versionInfo.version; 
-                $("#versionInfoVersion").text(versionInfo.version);
-                $("#versionInfoReleaseTime").text(versionInfo.release_time);
-                $("#versionInfoReleaseNote").html(marked.parse(versionInfo.release_note));
+            .then(info => {
+                version = info.version;
+                $("#versionInfoVersion").text(info.version);
+                $("#versionInfoReleaseTime").text(new Date(info.release_time).toLocaleString());
+                $("#versionInfoReleaseNote").html(marked.parse(info.release_note));
                 $("#versionInfo").removeClass("d-none");
             })
             .catch(error => {

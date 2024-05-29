@@ -51,8 +51,7 @@
     </style>
     <script src="/static/jquery.min.js"></script>
     <script src="/static/marked.min.js"></script>
-    <script async src="https://u.amazefcc233.com/script.js"
-        data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
+    <script async src="https://u.amazefcc233.com/script.js" data-website-id="9d7f25c3-8a50-4c79-af20-6c2411a17962"></script>
 </head>
 
 <body>
@@ -127,8 +126,7 @@
             </div>
         </div>
         <p>
-            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a
-                    href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small><br>
+            <small>*此页面仅展示最新版本的应用下载渠道。若需下载以往版本，请前往Github的<a href="https://github.com/liplum-dev/mimir/releases">Release</a>页自行下载。</small><br>
             <small>**App Store及TestFlight中的应用可能需要经过Apple审核，此过程可能需要几小时（最长应在24小时内完成）。若当前尚未看到最新版本，请耐心等待审核完成。</small>
         </p>
 
@@ -137,8 +135,7 @@
     <footer class="footer mt-auto py-3 mg-b-5">
         <div class="container">
             <span class="text-muted">
-                <a href="https://beian.miit.gov.cn/">沪ICP备18042337号-4</a> | Powered by <a
-                    href="https://github.com/Amazefcc233/mimir-docs">GitHub Pages</a>.
+                <a href="https://beian.miit.gov.cn/">沪ICP备18042337号-4</a> | Powered by <a href="https://github.com/Amazefcc233/mimir-docs">GitHub Pages</a>.
             </span>
         </div>
     </footer>
@@ -151,29 +148,29 @@
         })
             .then(response => response.json())
             .then(info => {
-                version = info.version
-                $("#versionInfoVersion").text(info.version)
-                $("#versionInfoReleaseTime").text(new Date(info.release_time).toLocaleString())
-                $("#versionInfoReleaseNote").html(marked.parse(info.release_note))
-                const download = info.downloads.iOS
+                version = info.version;
+                $("#versionInfoVersion").text(info.version);
+                $("#versionInfoReleaseTime").text(new Date(info.release_time).toLocaleString());
+                $("#versionInfoReleaseNote").html(marked.parse(info.release_note));
+                const download = info.downloads.iOS;
                 if (download?.name) {
-                    $("#versionInfoFileName").text(download.name)
-                    $("#versionInfoSHA256").text(download.sha256)
+                    $("#versionInfoFileName").text(download.name);
+                    $("#versionInfoSHA256").text(download.sha256);
                     for (const [channel, url] of Object.entries(download.url)) {
-                        $(`#link-download-${channel}`).attr("href", url)
+                        $(`#link-download-${channel}`).attr("href", url);
                     }
                 } else {
-                    $(".if-download-available").hide()
-                    $(".if-not-download-available").show()
+                    $(".if-download-available").hide();
+                    $(".if-not-download-available").show();
                 }
-                $("#versionInfo").removeClass("d-none")
+                $("#versionInfo").removeClass("d-none");
             })
             .catch(error => {
-                console.error("Failed to fetch version info.", error)
-                $("#loadingErrorAlert").removeClass("d-none")
+                console.error("Failed to fetch version info.", error);
+                $("#loadingErrorAlert").removeClass("d-none");
             })
             .then(() => {
-                $("#loadingPlaceholder").addClass("d-none")
+                $("#loadingPlaceholder").addClass("d-none");
             });
     </script>
 
