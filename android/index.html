@@ -57,7 +57,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">小应生活</a>
+        <a class="navbar-brand" href="/" style="padding-left: 16px;">小应生活</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -83,41 +83,45 @@
         <div id="loadingErrorAlert" class="alert alert-danger d-none" role="alert">
             无法获取版本信息
         </div>
-
+        
         <div id="versionInfo" class="card d-none">
             <div class="card-body">
-                <table class="table table-sm table-hover table-borderless">
-                    <tbody>
-                        <tr class="if-download-available">
-                            <th scope="row">文件名</th>
-                            <td id="versionInfoFileName">$fileName</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">版本号</th>
-                            <td id="versionInfoVersion">$version</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">发布时间</th>
-                            <td id="versionInfoReleaseTime">$releaseTime</td>
-                        </tr>
-                        <tr class="if-download-available">
-                            <th scope="row">SHA256</th>
-                            <td id="versionInfoSHA256">$sha256</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">更新说明</th>
-                            <td id="versionInfoReleaseNote">$releaseNote</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a id="link-download-official" href="$downloadUrl1"
-                    class="if-download-available btn btn-outline-primary mg-t-5">官方源下载</a>
-                <a id="link-download-github" href="$downloadUrl2"
-                    class="if-download-available btn btn-outline-success mg-t-5">GitHub下载</a>
-                <a id="link-download-mirror" href="$downloadUrl3"
-                    class="if-download-available btn btn-outline-info mg-t-5">GitHub镜像下载</a>
-                <a style="display: none;"
-                    class="if-not-download-available btn btn-outline-primary disabled mg-t-5">暂无下载</a>
+                <ol class="list-group list-group-flush">
+                    <li class="if-download-available list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">文件名</div>
+                            <div id="versionInfoFileName">$fileName</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">版本号</div>
+                            <div id="versionInfoVersion">$version</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">发布时间</div>
+                            <div id="versionInfoReleaseTime">$releaseTime</div>
+                        </div>
+                    </li>
+                    <li class="if-download-available list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">SHA256</div>
+                            <div id="versionInfoSHA256">$sha256</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">更新说明</div>
+                            <div id="versionInfoReleaseNote">$releaseNote</div>
+                        </div>
+                    </li>
+                </ol>
+                <a id="link-download-official" href="$downloadUrl1" class="if-download-available btn btn-outline-primary mg-t-5">官方源下载</a>
+                <a id="link-download-github" href="$downloadUrl2" class="if-download-available btn btn-outline-success mg-t-5">GitHub下载</a>
+                <a id="link-download-mirror" href="$downloadUrl3" class="if-download-available btn btn-outline-info mg-t-5">GitHub镜像下载</a>
+                <a class="if-not-download-available d-none btn btn-outline-primary disabled mg-t-5">暂无下载</a>
                 <div id="adAlert" class="alert alert-success mg-t-10" role="alert">
                     官方源下载由 <a href="https://www.sitmc.club/">上海应用技术大学Minecraft六角恐龙社群</a> 提供赞助
                 </div>
@@ -157,8 +161,8 @@
                         $(`#link-download-${channel}`).attr("href", url);
                     }
                 } else {
-                    $(".if-download-available").hide();
-                    $(".if-not-download-available").show();
+                    $(".if-download-available").addClass("d-none");
+                    $(".if-not-download-available").removeClass("d-none");
                 }
                 $("#versionInfo").removeClass("d-none");
             })
