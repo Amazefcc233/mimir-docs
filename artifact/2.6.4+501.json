@@ -1,0 +1,17 @@
+{
+  "version": "2.6.4+501",
+  "release_time": "2024-09-21T14:10:34.000Z",
+  "release_note": "**安卓用户推荐[前往应用商店](market://details?id=life.mysit.sit_life)进行更新**\r\n\r\n- 新增 | 消费记录中的充值按钮\r\n- 新增 | 课表同步功能，存在变动时可自动或手动一键同步\r\n- 新增 | 检测并提醒OA账号和密码在外部的变动\r\n- 新增 | 教育邮箱设置页面\r\n- 修复 | 研究生课表导入问题\r\n- 修复 | 应网办和电费不再需要连接校园网\r\n- 优化 | 课表预制卡片样式\r\n- 优化 | 教育邮箱的界面",
+  "downloads": {
+    "Android": {
+      "name": "sitlife-v2.6.4+501.apk",
+      "default": "official",
+      "sha256": "85235e0aa75b9866fb8095ad41c3c7515421969def0528a6dbd475345c735e6b",
+      "url": {
+        "official": "https://temp.sitmc.club/prepare-download/v2.6.4+501/sitlife-v2.6.4-501.apk",
+        "github": "https://github.com/plum-tech/mimir/releases/download/v2.6.4%2B501/sitlife-v2.6.4%2B501.apk",
+        "mirror": "https://mirror.ghproxy.com/https://github.com/plum-tech/mimir/releases/download/v2.6.4%2B501/sitlife-v2.6.4%2B501.apk"
+      }
+    }
+  }
+}
